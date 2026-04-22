@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Missions — Lucas Réal</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #1d1d1f;
+      --text-muted: #6e6e73;
+      --blue: #0071e3;
+      --border-light: #e8e8ed;
+      --gray-bg: #fafafa;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    /* ── DARK MODE ── */
+    body.dark {
+      --bg: #0d0d0f;
+      --text: #f5f5f7;
+      --text-muted: #a1a1a6;
+      --blue: #2997ff;
+      --border-light: #2a2a2e;
+      --gray-bg: #1a1a1e;
+    }
+    body.dark nav {
+      background: rgba(13,13,15,0.6);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    body.dark .btn-solid { background: #f5f5f7; color: #0d0d0f; }
+    body.dark .btn-solid:hover { background: var(--blue); color: #fff; }
+    body.dark .stage-btn { border-color: var(--blue); color: var(--text); }
+    body.dark .stage-btn:hover { background: var(--blue); color: #fff; }
+    body.dark .tp-card { background: #1a1a1e; border-color: #2a2a2e; }
+    body.dark .tp-card:hover { border-color: var(--blue); }
+    body.dark .skill-icon { background: rgba(41,151,255,0.1); }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: var(--font); font-size: 14px;
+      line-height: 1.6; overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(245,245,247,0.6);
+      backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    .nav-logo {
+      font-size: 15px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--text); text-decoration: none; flex-shrink: 0;
+    }
+    .nav-logo span { color: var(--blue); }
+    .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+    .nav-links a {
+      font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--text-muted); text-decoration: none; transition: color .2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--blue); }
+    .dark-toggle {
+      background: none; border: 1px solid var(--border-light); border-radius: 6px;
+      padding: 7px 12px; cursor: pointer; font-size: 16px; color: var(--text);
+      transition: border-color 0.2s; flex-shrink: 0;
+    }
+    .dark-toggle:hover { border-color: var(--blue); }
+
+    /* ── SECTIONS ── */
+    section {
+      min-height: 100vh; padding: 120px 48px 80px;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    section + section {
+      border-top: 1px solid var(--border-light);
+    }
+
+    .section-header { margin-bottom: 60px; text-align: center; width: 100%; max-width: 860px; }
+    .eyebrow { color: var(--blue); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 12px; }
+    .section-title { font-size: 48px; font-weight: 800; color: var(--text); }
+    .section-title .accent { color: var(--blue); }
+
+    .block-label {
+      font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 24px;
+      padding-bottom: 8px; border-bottom: 1px solid var(--border-light);
+      width: 100%;
+    }
+
+    /* ── SECTION 1 : STAGES ── */
+    .stages-wrapper { max-width: 720px; width: 100%; display: flex; flex-direction: column; gap: 40px; }
+
+    .stage-intro {
+      font-size: 15px; line-height: 1.85; color: var(--text-muted);
+      text-align: center;
+    }
+    .stage-intro strong { color: var(--text); }
+
+    .stage-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    .stage-btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      border: 1px solid var(--border-light); border-radius: 10px;
+      padding: 18px 32px; text-decoration: none; color: var(--text);
+      font-size: 13px; font-weight: 600; transition: 0.25s;
+      background: var(--bg);
+    }
+    .stage-btn:hover {
+      border-color: var(--blue); color: var(--blue);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,113,227,0.1);
+    }
+    .stage-btn-icon { font-size: 22px; }
+    .stage-btn-label { font-size: 10px; color: var(--text-muted); display: block; margin-top: 2px; font-weight: 400; letter-spacing: .05em; }
+
+    /* ── SECTION 2 : TP / RÉALISATIONS ── */
+    .tp-grid {
+      max-width: 860px; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+
+    .tp-card {
+      border: 1px solid var(--border-light); border-radius: 10px;
+      background: var(--gray-bg); padding: 24px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .tp-card:hover { border-color: var(--blue); transform: translateY(-2px); }
+
+    .tp-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .tp-tag {
+      font-size: 9px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--blue); border: 1px solid rgba(0,113,227,.3);
+      padding: 3px 8px; border-radius: 4px; white-space: nowrap;
+    }
+    .tp-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .tp-desc { font-size: 12px; color: var(--text-muted); line-height: 1.7; }
+
+    /* ── SECTION 3 : COMPÉTENCES ── */
+    .skills-grid {
+      max-width: 860px; width: 100%;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    }
+
+    .skill-card { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; }
+
+    .skill-icon {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(0,113,227,0.08);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+    }
+
+    .skill-name {
+      font-size: 11px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--text); line-height: 1.4;
+    }
+
+    /* ── BOUTON ── */
+    .btn-solid {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--text); color: var(--bg);
+      font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      padding: 14px 28px; text-decoration: none; transition: 0.3s; border-radius: 4px;
+    }
+    .btn-solid:hover { background: var(--blue); color: #fff; }
+
+    footer {
+      background: var(--bg); border-top: 1px solid var(--border-light);
+      padding: 28px 48px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-copy { font-size: 11px; color: var(--text-muted); letter-spacing: 0.1em; }
+    .footer-copy span { color: var(--blue); }
+
+    .reveal { opacity: 0; transform: translateY(22px); transition: .65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 860px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      section { padding: 100px 20px 60px; }
+      .tp-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Lucas<span>.</span>Réal</a>
+  <div style="display:flex; align-items:center; gap:32px;">
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="profil.html">Profil</a></li>
+      <li><a href="formations.html">Formations</a></li>
+      <li><a href="missions.html" class="active">Missions</a></li>
+      <li><a href="veille.html">Veille Technologique</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="dark-toggle" id="darkToggle" title="Mode nuit">🌙</button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     SECTION 1 — RAPPORTS DE STAGE
+════════════════════════════════════════ -->
+<section id="stages">
+  <div class="section-header reveal">
+    <div class="eyebrow">// 03 — expériences</div>
+    <h2 class="section-title">Mes <span class="accent">Stages</span></h2>
+  </div>
+
+  <div class="stages-wrapper">
+    <div class="block-label reveal">// Sommaire des stages</div>
+
+    <p class="stage-intro reveal">
+      Au cours de mes stages, j'ai eu l'opportunité d'intégrer des environnements professionnels
+      variés dans le domaine de l'informatique et des réseaux. Ces expériences m'ont permis de
+      mettre en pratique mes compétences techniques, de travailler en équipe avec
+      des professionnels et de développer mon sens des responsabilités dans un contexte réel.
+    </p>
+
+    <div class="stage-buttons reveal">
+      <a class="stage-btn" href="F:\BTS SIO\portfolio\Rapports_de_stage\Rapport_stage_BTS_1a.pdf" target="_blank">
+        <span class="stage-btn-icon">📄</span>
+        <span>
+          Stage 1
+          <span class="stage-btn-label">Rapport de stage — 2023</span>
+        </span>
+      </a>
+      <a class="stage-btn" href="F:\BTS SIO\portfolio\Rapports_de_stage\Rapport_stage_BTS_2a.pdf" target="_blank">
+        <span class="stage-btn-icon">📄</span>
+        <span>
+          Stage 2
+          <span class="stage-btn-label">Rapport de stage — 2024</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 2 — RÉALISATIONS BTS / TP
+════════════════════════════════════════ -->
+<section id="realisations">
+  <div class="section-header reveal">
+    <div class="eyebrow">// 04 — travaux pratiques</div>
+    <h2 class="section-title">Réalisations au cours <span class="accent">du BTS</span></h2>
+  </div>
+
+  <div class="tp-grid">
+
+    <div class="tp-card reveal">
+      <div class="tp-card-header">
+        <span class="tp-tag">Réseau</span>
+      </div>
+      <div class="tp-title">Active Directory</div>
+      <div class="tp-desc">Installation et configuration d'un domaine Active Directory sous Windows Server. Gestion des utilisateurs, groupes et stratégies de groupe (GPO).</div>
+    </div>
+
+    <div class="tp-card reveal">
+      <div class="tp-card-header">
+        <span class="tp-tag">Réseau</span>
+      </div>
+      <div class="tp-title">Configuration Cisco (VLAN & Routage)</div>
+      <div class="tp-desc">Mise en place de VLANs et configuration du routage inter-VLAN sur des switches et routeurs Cisco en environnement simulé (Packet Tracer).</div>
+    </div>
+
+    <div class="tp-card reveal">
+      <div class="tp-card-header">
+        <span class="tp-tag">Système</span>
+      </div>
+      <div class="tp-title">Services réseau Linux</div>
+      <div class="tp-desc">Déploiement de services DHCP, DNS, Apache et SSH sous Debian/Ubuntu. Administration en ligne de commande et configuration des fichiers de conf.</div>
+    </div>
+
+    <div class="tp-card reveal">
+      <div class="tp-card-header">
+        <span class="tp-tag">Sécurité</span>
+      </div>
+      <div class="tp-title">Firewall pfSense</div>
+      <div class="tp-desc">Mise en place et configuration d'un pare-feu pfSense. Définition de règles de filtrage, gestion des interfaces WAN/LAN et configuration du NAT.</div>
+    </div>
+
+    <div class="tp-card reveal">
+      <div class="tp-card-header">
+        <span class="tp-tag">Virtualisation</span>
+      </div>
+      <div class="tp-title">Virtualisation VirtualBox / VMware</div>
+      <div class="tp-desc">Création et gestion de machines virtuelles (Windows Server, Debian). Configuration des réseaux internes, snapshots et clonage de VMs.</div>
+    </div>
+
+    <div class="tp-card reveal">
+      <div class="tp-card-header">
+        <span class="tp-tag">Scripting</span>
+      </div>
+      <div class="tp-title">Scripts Bash & PowerShell</div>
+      <div class="tp-desc">Automatisation de tâches d'administration : création de comptes utilisateurs en masse, sauvegardes automatiques et rapports système.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 3 — COMPÉTENCES ACQUISES
+════════════════════════════════════════ -->
+<section id="competences">
+  <div class="section-header reveal">
+    <div class="eyebrow">// 05 — bilan</div>
+    <h2 class="section-title">Compétences <span class="accent">développées</span></h2>
+  </div>
+
+  <div class="skills-grid">
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">🗂️</div>
+      <div class="skill-name">Travailler en mode projet</div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">🌐</div>
+      <div class="skill-name">Configuration équipements réseau</div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">🖥️</div>
+      <div class="skill-name">Gérer le patrimoine informatique</div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">📈</div>
+      <div class="skill-name">Organiser son développement professionnel</div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">🔒</div>
+      <div class="skill-name">Répondre aux incidents de sécurité</div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">⚙️</div>
+      <div class="skill-name">Administrer les systèmes et réseaux</div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">🤝</div>
+      <div class="skill-name">Travailler en équipe</div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">📝</div>
+      <div class="skill-name">Rédiger des documentations techniques</div>
+    </div>
+
+  </div>
+
+  <div class="reveal" style="margin-top: 60px;">
+    <a class="btn-solid" href="veille.html">Voir ma Veille Technologique &rarr;</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-copy">&copy; 2026 Lucas Réal — Portfolio BTS SIO SISR</div>
+  <div class="footer-copy">Hébergé par <span>GitHub Pages</span></div>
+</footer>
+
+<script>
+  // Reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Dark mode
+  const darkToggle = document.getElementById('darkToggle');
+  if (localStorage.getItem('darkMode') === 'on') {
+    document.body.classList.add('dark');
+    darkToggle.textContent = '☀️';
+  }
+  darkToggle.addEventListener('click', function() {
+    document.body.classList.toggle('dark');
+    const isDark = document.body.classList.contains('dark');
+    darkToggle.textContent = isDark ? '☀️' : '🌙';
+    localStorage.setItem('darkMode', isDark ? 'on' : 'off');
+  });
+</script>
+</body>
+</html>

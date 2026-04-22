@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formations — Lucas Réal</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #1d1d1f;
+      --text-muted: #6e6e73;
+      --blue: #0071e3;
+      --border-light: #e8e8ed;
+      --gray-bg: #fafafa;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    /* ── DARK MODE ── */
+    body.dark {
+      --bg: #0d0d0f;
+      --text: #f5f5f7;
+      --text-muted: #a1a1a6;
+      --blue: #2997ff;
+      --border-light: #2a2a2e;
+      --gray-bg: #1a1a1e;
+    }
+    body.dark nav {
+      background: rgba(13,13,15,0.6);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    body.dark .btn-solid { background: #f5f5f7; color: #0d0d0f; }
+    body.dark .btn-solid:hover { background: var(--blue); color: #fff; }
+    body.dark .formation-tag { border-color: rgba(41,151,255,.4); }
+    body.dark .cert-header { background: #1a1a1e; }
+    body.dark .cert-header:hover { background: #222226; }
+    body.dark .cert-item:hover { background: #1a1a1e; border-color: var(--blue); }
+    body.dark .cert-logo-emoji { background: #1a1a1e; }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: var(--font); font-size: 14px;
+      line-height: 1.6; overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+ 
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(245,245,247,0.6);
+      backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    .nav-logo {
+      font-size: 15px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--text); text-decoration: none; flex-shrink: 0;
+    }
+    .nav-logo span { color: var(--blue); }
+    .nav-links {
+      display: flex; gap: 36px; list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--text-muted); text-decoration: none; transition: color .2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--blue); }
+    .dark-toggle {
+      background: none; border: 1px solid var(--border-light); border-radius: 6px;
+      padding: 7px 12px; cursor: pointer; font-size: 16px; color: var(--text);
+      transition: border-color 0.2s; flex-shrink: 0;
+    }
+    .dark-toggle:hover { border-color: var(--blue); }
+    .dark-toggle {
+      background: none; border: 1px solid var(--border-light); border-radius: 6px;
+      padding: 7px 12px; cursor: pointer; font-size: 16px; color: var(--text);
+      transition: border-color 0.2s; flex-shrink: 0;
+    }
+    .dark-toggle:hover { border-color: var(--blue); }
+
+    section {
+      min-height: 100vh; padding: 120px 48px 80px;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .section-header { text-align: center; }
+    .section-header { margin-bottom: 60px; }
+    .eyebrow { color: var(--blue); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 12px; }
+    .section-title { font-size: 48px; font-weight: 800; color: var(--text); }
+    .section-title .accent { color: var(--blue); }
+
+    .block-label {
+      font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 20px;
+      padding-bottom: 8px; border-bottom: 1px solid var(--border-light);
+    }
+
+    /* ── SCOLARITÉ ── */
+    .formations-list { max-width: 860px; margin-bottom: 60px; }
+    .formation-item {
+      display: grid; grid-template-columns: 160px 1fr 120px;
+      align-items: center; padding: 32px 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .formation-date { font-size: 12px; color: var(--blue); }
+    .formation-title { font-size: 17px; font-weight: 700; margin-bottom: 4px; color: var(--text); }
+    .formation-school { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
+    .formation-detail { font-size: 11px; color: var(--text-muted); line-height: 1.6; }
+    .formation-tag {
+      justify-self: end; font-size: 9px; letter-spacing: .1em;
+      text-transform: uppercase; padding: 4px 10px;
+      border: 1px solid rgba(0,113,227,.3); color: var(--blue);
+    }
+
+    /* ── CERTIFICATIONS ACCORDÉON ── */
+    .certifications-list { display: flex; flex-direction: column; gap: 10px; }
+
+    .cert-block {
+      border: 1px solid var(--border-light);
+      border-radius: 10px; overflow: hidden;
+    }
+
+    .cert-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 22px; background: var(--gray-bg);
+      cursor: pointer; user-select: none; transition: background 0.2s; gap: 16px;
+    }
+    .cert-header:hover { background: var(--border-light); }
+
+    .cert-header-left { display: flex; align-items: center; gap: 14px; }
+
+    .cert-logo-emoji {
+      width: 40px; height: 40px; border-radius: 8px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; background: #fff; border: 1px solid var(--border-light);
+    }
+
+    .cert-title { font-size: 15px; font-weight: 700; color: var(--text); }
+    .cert-subtitle { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+    .cert-header-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .cert-count {
+      font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--blue); border: 1px solid rgba(0,113,227,.3);
+      padding: 4px 10px; border-radius: 4px; white-space: nowrap;
+    }
+    .cert-chevron { font-size: 11px; color: var(--text-muted); transition: transform 0.3s; }
+    .cert-block.open .cert-chevron { transform: rotate(180deg); }
+
+    .cert-body {
+      border-top: 1px solid var(--border-light);
+      padding: 14px; display: none; flex-direction: column; gap: 8px;
+    }
+    .cert-block.open .cert-body { display: flex; }
+
+    .cert-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 16px; border-radius: 7px;
+      border: 1px solid var(--border-light); background: var(--bg);
+      text-decoration: none; color: var(--text);
+      transition: background 0.2s, border-color 0.2s; gap: 12px;
+    }
+    .cert-item:hover { background: var(--gray-bg); border-color: var(--blue); }
+
+    .cert-item-left { display: flex; flex-direction: column; gap: 3px; }
+    .cert-item-name { font-size: 13px; font-weight: 600; color: var(--text); }
+    .cert-item-date { font-size: 11px; color: var(--text-muted); }
+
+    .cert-item-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+
+    .score-pill {
+      font-size: 11px; font-weight: 700; color: var(--blue);
+      border: 1px solid rgba(0,113,227,.3); padding: 3px 10px; border-radius: 20px;
+    }
+    .score-pill.perfect { color: #34c759; border-color: rgba(52,199,89,.4); }
+    .cert-link-icon { font-size: 14px; color: var(--text-muted); }
+
+    /* ── BOUTON ── */
+    .btn-solid {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--text); color: var(--bg);
+      font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      padding: 14px 28px; text-decoration: none; transition: 0.3s; border-radius: 4px;
+    }
+    .btn-solid:hover { background: var(--blue); color: #fff; }
+
+footer {
+  display: flex;
+  flex-direction: column; /* Aligne les lignes verticalement */
+  align-items: center;    /* Centre horizontalement */
+  justify-content: center; /* Centre verticalement */
+  text-align: center;
+  padding: 40px 20px;     /* Espace intérieur */
+  gap: 10px;              /* Espace entre les deux lignes de texte */
+  border-top: 1px solid var(--border-light);
+  background: var(--bg);
+}
+.footer-copy {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.footer-copy span {
+  color: var(--blue);
+  font-weight: 600;
+}
+    .reveal { opacity: 0; transform: translateY(22px); transition: 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 860px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      section { padding: 100px 20px 60px; }
+      .formation-item { grid-template-columns: 1fr; gap: 12px; }
+      .formation-tag { justify-self: start; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Lucas<span>.</span>Réal</a>
+  <div style="display:flex; align-items:center; gap:36px;">
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="profil.html">Profil</a></li>
+    <li><a href="formations.html" class="active">Formations</a></li>
+    <li><a href="missions.html">Missions</a></li>
+    <li><a href="veille.html">Veille Technologique</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="dark-toggle" id="darkToggle" title="Mode nuit">🌙</button>
+  </div>
+</nav>
+
+<section id="formations">
+  <div class="section-header reveal">
+    <div class="eyebrow">// 02 — parcours</div>
+    <h2 class="section-title">Forma<span class="accent">tions</span></h2>
+  </div>
+
+  <!-- SCOLARITÉ -->
+  <div class="formations-list">
+    <div class="block-label reveal">// Scolarité</div>
+
+    <div class="formation-item reveal">
+      <div class="formation-date">2024 &rarr; 2026</div>
+      <div>
+        <div class="formation-title">BTS SIO — Option SISR</div>
+        <div class="formation-school">Lycée St Josup — Le Havre</div>
+        <div class="formation-detail">Services Informatiques aux Organisations<br>Solutions d'Infrastructure, Systèmes et Réseaux</div>
+      </div>
+      <div class="formation-tag">En cours</div>
+    </div>
+
+    <div class="formation-item reveal">
+      <div class="formation-date">2021 &rarr; 2024</div>
+      <div>
+        <div class="formation-title">Baccalauréat Général </div>
+        <div class="formation-school">Lycée Saint Jospeh — Le Havre</div>
+        <div class="formation-detail">Mathématiques — Sciences de la vie et de la Terre<br>Sans mention</div>
+      </div>
+      <div class="formation-tag">Obtenu</div>
+    </div>
+
+    <div class="formation-item reveal">
+      <div class="formation-date">2017 &rarr; 2021</div>
+      <div>
+        <div class="formation-title">Brevet des Collèges</div>
+        <div class="formation-school">Collège Saint Jospeh — Le Havre</div>
+        <div class="formation-detail">Mention Bien</div>
+      </div>
+      <div class="formation-tag">Obtenu</div>
+    </div>
+  </div>
+
+  <!-- CERTIFICATIONS -->
+  <div class="formations-list">
+    <div class="block-label reveal">// Certifications &amp; Formations en ligne</div>
+
+    <div class="certifications-list reveal">
+
+      <!-- ANSSI -->
+      <div class="cert-block" id="block-anssi">
+        <div class="cert-header" onclick="toggleCert('block-anssi')">
+          <div class="cert-header-left">
+            <div class="cert-logo-emoji">🛡️</div>
+            <div>
+              <div class="cert-title">MOOC de l'ANSSI</div>
+              <div class="cert-subtitle">Agence Nationale de la Sécurité des Systèmes d'Information</div>
+            </div>
+          </div>
+          <div class="cert-header-right">
+            <span class="cert-count">1 certificat</span>
+            <span class="cert-chevron">▼</span>
+          </div>
+        </div>
+        <div class="cert-body">
+          <a class="cert-item" href="#" target="_blank">
+            <div class="cert-item-left">
+              <div class="cert-item-name">SecNumacadémie — Sensibilisation à la cybersécurité</div>
+              <div class="cert-item-date">ANSSI · 2024</div>
+            </div>
+            <div class="cert-item-right">
+              <span class="cert-link-icon">↗</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- RGPD / CNIL -->
+      <div class="cert-block" id="block-rgpd">
+        <div class="cert-header" onclick="toggleCert('block-rgpd')">
+          <div class="cert-header-left">
+            <div class="cert-logo-emoji">🔒</div>
+            <div>
+              <div class="cert-title">Certification RGPD</div>
+              <div class="cert-subtitle">L'Atelier RGPD — CNIL</div>
+            </div>
+          </div>
+          <div class="cert-header-right">
+            <span class="cert-count">5 certificats</span>
+            <span class="cert-chevron">▼</span>
+          </div>
+        </div>
+        <div class="cert-body">
+          <a class="cert-item" href="F:\BTS SIO\portfolio\Certifications\Certificat_1.pdf" target="_blank">
+            <div class="cert-item-left">
+              <div class="cert-item-name">Module 1 — Le RGPD et ses notions clés</div>
+              <div class="cert-item-date">CNIL · 24 septembre 2024</div>
+            </div>
+            <div class="cert-item-right">
+              <span class="score-pill">81 %</span>
+              <span class="cert-link-icon">↗</span>
+            </div>
+          </a>
+          <a class="cert-item" href="F:\BTS SIO\portfolio\Certifications\Certificat_2.pdf" target="_blank">
+            <div class="cert-item-left">
+              <div class="cert-item-name">Module 2 — Les principes de la protection des données</div>
+              <div class="cert-item-date">CNIL · 25 septembre 2024</div>
+            </div>
+            <div class="cert-item-right">
+              <span class="score-pill">86 %</span>
+              <span class="cert-link-icon">↗</span>
+            </div>
+          </a>
+          <a class="cert-item" href="F:\BTS SIO\portfolio\Certifications\Certificat_3.pdf" target="_blank">
+            <div class="cert-item-left">
+              <div class="cert-item-name">Module 3 — Les responsabilités des acteurs</div>
+              <div class="cert-item-date">CNIL · 25 septembre 2024</div>
+            </div>
+            <div class="cert-item-right">
+              <span class="score-pill">80 %</span>
+              <span class="cert-link-icon">↗</span>
+            </div>
+          </a>
+          <a class="cert-item" href="F:\BTS SIO\portfolio\Certifications\Certificat_4.pdf" target="_blank">
+            <div class="cert-item-left">
+              <div class="cert-item-name">Module 4 — Le DPO et les outils de la conformité</div>
+              <div class="cert-item-date">CNIL · 25 septembre 2024</div>
+            </div>
+            <div class="cert-item-right">
+              <span class="score-pill">93 %</span>
+              <span class="cert-link-icon">↗</span>
+            </div>
+          </a>
+          <a class="cert-item" href="F:\BTS SIO\portfolio\Certifications\Certificat_5.pdf" target="_blank">
+            <div class="cert-item-left">
+              <div class="cert-item-name">Module 5 — Les collectivités territoriales</div>
+              <div class="cert-item-date">CNIL · 25 septembre 2024</div>
+            </div>
+            <div class="cert-item-right">
+              <span class="score-pill perfect">100 %</span>
+              <span class="cert-link-icon">↗</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- PIX -->
+      <div class="cert-block" id="block-pix">
+        <div class="cert-header" onclick="toggleCert('block-pix')">
+          <div class="cert-header-left">
+            <div class="cert-logo-emoji">⭐</div>
+            <div>
+              <div class="cert-title">Certification PIX</div>
+              <div class="cert-subtitle">Évaluation nationale des compétences numériques</div>
+            </div>
+          </div>
+          <div class="cert-header-right">
+            <span class="cert-count">1 certificat</span>
+            <span class="cert-chevron">▼</span>
+          </div>
+        </div>
+        <div class="cert-body">
+          <a class="cert-item" href="F:\BTS SIO\portfolio\Certifications\Certification_pix.pdf" target="_blank">
+            <div class="cert-item-left">
+              <div class="cert-item-name">Certification PIX — Compétences numériques</div>
+              <div class="cert-item-date">PIX · 2024</div>
+            </div>
+            <div class="cert-item-right">
+              <span class="cert-link-icon">↗</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- TryHackMe -->
+      <div class="cert-block" id="block-thm">
+        <div class="cert-header" onclick="toggleCert('block-thm')">
+          <div class="cert-header-left">
+            <div class="cert-logo-emoji">💻</div>
+            <div>
+              <div class="cert-title">TryHackMe</div>
+              <div class="cert-subtitle">Plateforme d'apprentissage en cybersécurité</div>
+            </div>
+          </div>
+          <div class="cert-header-right">
+            <span class="cert-count">Parcours</span>
+            <span class="cert-chevron">▼</span>
+          </div>
+        </div>
+        <div class="cert-body">
+          <a class="cert-item" href="F:\BTS SIO\portfolio\Certifications\thm.png" target="_blank">
+            <div class="cert-item-left">
+              <div class="cert-item-name">Pre-Security Learning Path</div>
+              <div class="cert-item-date">TryHackMe · 2024</div>
+            </div>
+            <div class="cert-item-right">
+              <span class="cert-link-icon">↗</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="reveal">
+    <a class="btn-solid" href="missions.html">Voir mes Missions &rarr;</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-copy">&copy; 2026 Lucas Réal — Portfolio BTS SIO</div>
+  <div class="footer-copy">Hébergé sur <span>GitHub Pages</span></div>
+</footer>
+
+<script>
+  // Reveal animation
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(function(el) { observer.observe(el); });
+
+  // Accordéon
+  function toggleCert(id) {
+    document.getElementById(id).classList.toggle('open');
+  }
+
+  // Dark mode
+  const darkToggle = document.getElementById('darkToggle');
+  if (localStorage.getItem('darkMode') === 'on') {
+    document.body.classList.add('dark');
+    darkToggle.textContent = '☀️';
+  }
+  darkToggle.addEventListener('click', function() {
+    document.body.classList.toggle('dark');
+    const isDark = document.body.classList.contains('dark');
+    darkToggle.textContent = isDark ? '☀️' : '🌙';
+    localStorage.setItem('darkMode', isDark ? 'on' : 'off');
+  });
+</script>
+</body>
+</html>

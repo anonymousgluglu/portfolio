@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil — Lucas Réal</title>
+  <style>
+    :root {
+      --bg: #ffffff; 
+      --text: #1d1d1f; 
+      --text-muted: #6e6e73;
+      --blue: #0071e3; 
+      --border-light: #e8e8ed; 
+      --gray-bg: #fafafa;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body.dark {
+      --bg: #0d0d0f;
+      --text: #f5f5f7;
+      --text-muted: #a1a1a6;
+      --blue: #2997ff;
+      --border-light: #2a2a2e;
+      --gray-bg: #1a1a1e;
+    }
+    body.dark nav {
+      background: rgba(13,13,15,.95);
+    }
+    body.dark .comp-card-title,
+    body.dark .exp-card-header {
+      background: #2a2a2e;
+      color: #f5f5f7;
+    }
+    body.dark .btn-solid {
+      background: #f5f5f7;
+      color: #0d0d0f;
+    }
+    body.dark .btn-solid:hover {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    /* ── BOUTON MODE NUIT ── */
+    .dark-toggle {
+      background: none;
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      padding: 7px 12px;
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 1;
+      color: var(--text);
+      transition: 0.2s;
+    }
+    .dark-toggle:hover { border-color: var(--blue); }
+
+  *, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+    body {
+      background: var(--bg); 
+      color: var(--text);
+      font-family: var(--font); 
+      /* ZOOM PAR DÉFAUT : Taille de base augmentée + zoom léger */
+      font-size: 16px; 
+      zoom: 1.05; 
+      line-height: 1.6; 
+      overflow-x: hidden; 
+      -webkit-font-smoothing: antialiased;
+    }
+
+/* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(245, 245, 247, 0.75);
+      backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    body.dark nav {
+      background: rgba(13, 13, 15, 0.75);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .nav-logo {
+      font-size: 15px; font-weight: 800; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--text); text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-logo span { color: var(--blue); }
+    .nav-links {
+      display: flex; gap: 30px; list-style: none; align-items: center;
+    }
+    .nav-links a {
+      font-size: 11px; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--text-muted); text-decoration: none;
+      transition: color .2s; font-weight: 600;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--blue); }
+    #darkToggle {
+      background: var(--gray-bg);
+      border: 1px solid var(--border-light);
+      color: var(--text);
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    #darkToggle:hover { border-color: var(--blue); }
+/* On garde bien la variante pour le mode sombre à part */
+body.dark nav {
+  background: rgba(13, 13, 15, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+    /* ── STRUCTURE ── */
+/* Remplacez votre bloc section actuel par celui-ci */
+section {
+  /* Retirez min-height: 100vh; */
+  padding: 80px 48px; /* On réduit le padding du haut de 140px à 80px */
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+}
+
+    .section-header { margin-bottom: 60px; text-align: center; }
+    .eyebrow {
+      color: var(--blue); font-size: 10px;
+      letter-spacing: .2em; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .section-title { font-size: 42px; font-weight: 700; color: var(--text); letter-spacing: -1px; }
+    .section-title .accent { color: var(--blue); }
+
+    .profil-center { max-width: 680px; width: 100%; display: flex; flex-direction: column; gap: 40px; }
+
+    .profil-bio {
+      font-size: 17px; line-height: 1.8; color: var(--text-muted);
+      text-align: center; margin-bottom: 20px;
+    }
+
+    .block-label {
+      font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 16px;
+      padding-bottom: 8px; border-bottom: 1px solid var(--border-light);
+      font-weight: 700;
+    }
+
+    /* ── GRILLE D'INFORMATIONS ── */
+    .info-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      border: 1px solid var(--border-light); background: var(--border-light);
+      border-radius: 8px; overflow: hidden;
+    }
+    .info-cell { background: var(--gray-bg); padding: 20px; }
+    .info-key { font-size: 10px; color: var(--text-muted); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 4px; }
+    .info-val { font-size: 14px; font-weight: 600; color: var(--text); }
+
+    /* ── COMPÉTENCES ── */
+    .skills-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-pill {
+      font-size: 12px; padding: 8px 16px;
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      background: var(--gray-bg); color: var(--text); font-weight: 500;
+    }
+
+    /* ── LANGUES ── */
+    .langs-grid { display: flex; gap: 16px; flex-wrap: wrap; }
+    .lang-item {
+      flex: 1; min-width: 140px;
+      border: 1px solid var(--border-light); border-radius: 8px;
+      background: var(--gray-bg); padding: 16px; text-align: center;
+    }
+    .lang-name { font-size: 15px; font-weight: 700; }
+    .lang-level { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+    /* ── INTÉRÊTS ── */
+    .interests-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .interest-tag {
+      font-size: 12px; padding: 8px 16px;
+      background: rgba(0,113,227,.05);
+      border: 1px solid rgba(0,113,227,.15);
+      border-radius: 6px; color: var(--blue); font-weight: 500;
+    }
+
+    .btn-solid {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      background: var(--text); color: #fff;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 16px 32px; text-decoration: none; transition: 0.3s;
+      border-radius: 6px; margin-top: 20px;
+    }
+    .btn-solid:hover { background: var(--blue); transform: translateY(-2px); }
+
+    /* ── EXPÉRIENCES ── */
+    .exp-card {
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      background: var(--gray-bg);
+      overflow: hidden;
+      width: 100%;
+    }
+    .exp-card-header {
+      background: var(--text);
+      color: #fff;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .exp-card-title { font-size: 16px; font-weight: 700; }
+    .exp-card-sub { font-size: 11px; color: rgba(255,255,255,.6); margin-top: 4px; letter-spacing: .08em; }
+    .exp-badge {
+      font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      background: var(--blue); color: #fff;
+      padding: 6px 12px; border-radius: 4px; white-space: nowrap;
+    }
+    .exp-card-body { padding: 20px 24px; display: flex; flex-direction: column; gap: 12px; }
+    .exp-meta { display: flex; gap: 24px; flex-wrap: wrap; }
+    .exp-meta-item { display: flex; flex-direction: column; gap: 2px; }
+    .exp-meta-key { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--text-muted); }
+    .exp-meta-val { font-size: 13px; font-weight: 600; color: var(--text); }
+    .exp-desc { font-size: 14px; color: var(--text-muted); line-height: 1.75; }
+
+footer {
+  display: flex;
+  flex-direction: column; /* Aligne les lignes verticalement */
+  align-items: center;    /* Centre horizontalement */
+  justify-content: center; /* Centre verticalement */
+  text-align: center;
+  padding: 40px 20px;     /* Espace intérieur */
+  gap: 10px;              /* Espace entre les deux lignes de texte */
+  border-top: 1px solid var(--border-light);
+  background: var(--bg);
+}
+
+.footer-copy {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.footer-copy span {
+  color: var(--blue);
+  font-weight: 600;
+}
+    /* ── GRILLE COMPÉTENCES PAR CATÉGORIE ── */
+    .competences-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .comp-card {
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      background: var(--gray-bg);
+      overflow: hidden;
+    }
+    .comp-card-title {
+      background: var(--text);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 10px 16px;
+    }
+    .comp-list {
+      list-style: none;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .comp-list li {
+      font-size: 13px;
+      color: var(--text);
+      padding-left: 12px;
+      position: relative;
+    }
+    .comp-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--blue);
+      font-weight: 700;
+    }
+  /* Container de la section CV */
+.cv-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.cv-wrapper {
+  width: 100%;
+  max-width: 800px; /* Largeur optimale pour un CV A4 */
+}
+
+/* Style du cadre de l'iframe */
+.cv-preview-frame {
+  width: 100%;
+  height: 600px; /* Hauteur confortable */
+  background: var(--gray-bg);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  margin-bottom: 25px;
+}
+
+.cv-preview-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Alignement des boutons */
+.cv-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+/* Ajoutez ceci dans votre bloc <style> */
+#cv {
+  padding-top: 0; /* Supprime l'espace supérieur pour la section CV */
+}
+
+#cv .section-header {
+  margin-bottom: 30px; /* Réduit l'espace sous le titre "Mon CV" */
+}
+/* Adaptation spécifique pour le bouton contour en mode nuit */
+body.dark .btn-outline {
+      background: #f5f5f7;
+      color: #0d0d0f;
+    }
+
+body.dark .btn-outline:hover {
+      background: var(--blue);
+      color: #fff;
+    }
+
+/* Responsive : ajuster la hauteur sur mobile */
+@media (max-width: 768px) {
+  .cv-preview-frame {
+    height: 400px;
+  }
+}
+/* Base commune pour les deux boutons */
+.btn-solid, .btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  
+  /* Dimensions identiques */
+  padding: 14px 28px;
+  min-width: 200px; /* Force une largeur minimale égale */
+  height: 48px;     /* Force une hauteur identique */
+  
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid transparent; /* Pour éviter le saut de pixel */
+}
+
+/* Couleurs Bouton Rempli (Télécharger) */
+.btn-solid {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      background: var(--text); color: #fff;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 16px 32px; text-decoration: none; transition: 0.3s;
+      border-radius: 6px; margin-top: 20px;
+    }
+
+.btn-solid:hover { background: var(--blue); transform: translateY(-2px); }
+
+/* Couleurs Bouton Contour (Plein écran) */
+.btn-outline {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      background: var(--text); color: #fff;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 16px 32px; text-decoration: none; transition: 0.3s;
+      border-radius: 6px; margin-top: 20px;
+    }
+.btn-outline:hover { background: var(--blue); transform: translateY(-2px); }
+
+/* Ajustements Mode Nuit */
+body.dark .btn-solid {
+  background-color: #f5f5f7; /* Blanc cassé en mode nuit */
+  color: #0d0d0f;
+}
+
+body.dark .btn-outline {
+  background-color: #f5f5f7; /* Blanc cassé en mode nuit */
+  color: #0d0d0f;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Lucas<span>.</span>Réal</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="profil.html" class="active">Profil</a></li>
+    <li><a href="formations.html">Formations</a></li>
+    <li><a href="missions.html">Missions</a></li>
+    <li><a href="veille.html">Veille Technologique</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><button id="darkToggle">🌙</button></li>
+  </ul>
+</nav>
+
+<section id="profil">
+  <div class="section-header reveal">
+    <div class="eyebrow">// 01 — profil</div>
+    <h2 class="section-title">Qui suis-<span class="accent">je</span> ?</h2>
+  </div>
+
+  <div class="profil-center">
+
+    <p class="profil-bio reveal">
+      Étudiant en <strong>BTS Services Informatiques aux Organisations</strong> au lycée St Josup du Havre.
+      Passionné par les systèmes, les réseaux et la cybersécurité, je construis mes compétences
+      à travers mes formations et mes expériences pratiques pour devenir un expert en infrastructure.
+    </p>
+
+    <div class="reveal">
+      <div class="block-label">// Informations</div>
+      <div class="info-grid">
+        <div class="info-cell"><div class="info-key">Email</div><div class="info-val">lucas.real@gmail.com</div></div>
+        <div class="info-cell"><div class="info-key">Localisation</div><div class="info-val">Le Havre, France</div></div>
+        <div class="info-cell"><div class="info-key">Formation</div><div class="info-val">BTS SIO SISR</div></div>
+        <div class="info-cell"><div class="info-key">École</div><div class="info-val">St Josup — Le Havre</div></div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="block-label">// Compétences techniques</div>
+
+      <p style="font-size:14px;color:var(--text-muted);line-height:1.8;margin-bottom:28px;">
+        J'ai acquis ces compétences à la fois par mes études et par ma propre initiative. J'ai toujours été fasciné par la technologie
+        et j'ai travaillé dur pour développer mes compétences en programmation et en réseau.<br><br>
+        Mon parcours m'a permis de travailler sur une variété de projets passionnants, allant de la création de sites web
+        à la conception d'un réseau TCP/IP.
+      </p>
+
+      <div class="competences-grid">
+
+        <div class="comp-card">
+          <div class="comp-card-title">Systèmes d'exploitation</div>
+          <ul class="comp-list">
+            <li>Linux (Debian, Ubuntu)</li>
+            <li>Windows (Windows Serveur, Windows 7 à 11)</li>
+          </ul>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-card-title">Programmation</div>
+          <ul class="comp-list">
+            <li>HTML, CSS, XML</li>
+            <li>Python, C</li>
+          </ul>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-card-title">Scripting</div>
+          <ul class="comp-list">
+            <li>Bash / Shell</li>
+            <li>PowerShell</li>
+          </ul>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-card-title">Réseau</div>
+          <ul class="comp-list">
+            <li>Services Réseau IPv6 et IPv4 (DHCP, DNS, Pare-feu…)</li>
+            <li>Routeur et Switch Cisco (Vlan, routage)</li>
+            <li>Routeurs Virtuels et Firewall (PFSENSE)</li>
+            <li>Active Directory</li>
+            <li>WAN et LAN — IPv6 et IPv4</li>
+          </ul>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-card-title">Virtualisation</div>
+          <ul class="comp-list">
+            <li>Hyperviseur Type 2 (VirtualBox, VMware Workstation)</li>
+          </ul>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-card-title">Base de données</div>
+          <ul class="comp-list">
+            <li>MySQL, SQLserver</li>
+          </ul>
+        </div>
+
+        <div class="comp-card" style="grid-column: span 2;">
+          <div class="comp-card-title">Services</div>
+          <ul class="comp-list" style="flex-direction:row;flex-wrap:wrap;gap:8px 32px;">
+            <li>Apache / Nginx, PHP, MySQL</li>
+            <li>FTP, SFTP, Samba, SSH, etc…</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="block-label">// Langues</div>
+      <div class="langs-grid">
+        <div class="lang-item">
+          <div class="lang-name">Français</div>
+          <div class="lang-level">Langue maternelle</div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-name">Anglais</div>
+          <div class="lang-level">Niveau B1 / Professionnel</div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-name">Espagnol</div>
+          <div class="lang-level">Niveau B1 / Professionnel</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="block-label">// Centres d'intérêt</div>
+      <div class="interests-grid">
+        <span class="interest-tag">Cybersécurité</span>
+        <span class="interest-tag">Sport</span>
+        <span class="interest-tag">Voyages</span>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="block-label">// Expériences professionnelles</div>
+      <div class="exp-card">
+        <div class="exp-card-header">
+          <div>
+            <div class="exp-card-title">Hôte de caisse — Auchan Montivilliers</div>
+            <div class="exp-card-sub">Contrat étudiant · CDD</div>
+          </div>
+          <div class="exp-badge">5 mois</div>
+        </div>
+        <div class="exp-card-body">
+          <div class="exp-meta">
+            <div class="exp-meta-item">
+              <div class="exp-meta-key">Début</div>
+              <div class="exp-meta-val">19 juillet 2025</div>
+            </div>
+            <div class="exp-meta-item">
+              <div class="exp-meta-key">Fin</div>
+              <div class="exp-meta-val">20 décembre 2025</div>
+            </div>
+            <div class="exp-meta-item">
+              <div class="exp-meta-key">Lieu</div>
+              <div class="exp-meta-val">Montivilliers, France</div>
+            </div>
+            <div class="exp-meta-item">
+              <div class="exp-meta-key">Type</div>
+              <div class="exp-meta-val">Contrat étudiant</div>
+            </div>
+          </div>
+          <div class="exp-desc">
+            Accueil et encaissement des clients au sein du magasin Auchan de Montivilliers.
+            Gestion des flux en caisse, fidélisation client et maintien d'un service de qualité
+            dans un environnement dynamique et exigeant.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="cv">
+  
+  <div class="section-header reveal">
+    <h2 class="section-title">Mon <span class="accent">CV</span></h2>
+  </div>
+
+  <div class="profil-center">
+    <div class="cv-wrapper reveal">
+      <div class="cv-preview-frame">
+        <iframe src="CV_sans_photo .pdf" title="CV Lucas Réal"></iframe>
+      </div>
+      <div class="cv-actions">
+        <a class="btn-solid" href="CV_sans_photo .pdf" download="CV_Lucas_Real.pdf">
+          ⬇ Télécharger le CV
+        </a>
+        <a class="btn-outline" href="CV_sans_photo .pdf" target="_blank">
+          ↗ Ouvrir en plein écran
+        </a>
+      </div>
+    </div>
+
+    <div class="reveal" style="text-align: center; margin-top: 40px;">
+      <a class="btn-solid" href="formations.html">Découvrir mon parcours &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-copy">&copy; 2026 Lucas Réal — Portfolio BTS SIO</div>
+  <div class="footer-copy">Hébergé sur <span>GitHub Pages</span></div>
+</footer>
+
+<script>
+  // DARK MODE
+  const toggle = document.getElementById('darkToggle');
+  if (localStorage.getItem('darkMode') === 'on') {
+    document.body.classList.add('dark');
+    toggle.textContent = '☀️';
+  }
+  toggle.addEventListener('click', function() {
+    document.body.classList.toggle('dark');
+    const isDark = document.body.classList.contains('dark');
+    localStorage.setItem('darkMode', isDark ? 'on' : 'off');
+    toggle.textContent = isDark ? '☀️' : '🌙';
+  });
+
+  // SCROLL REVEAL
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
