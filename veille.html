@@ -4,7 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Veille Technologique — Lucas Réal</title>
-  <style>
+  <style>      <!-- ANSSI -->
+      <div class="cert-block" id="block-anssi">
+        <div class="cert-header" onclick="toggleCert('block-anssi')">
+          <div class="cert-header-left">
+            <div class="cert-logo-emoji">🛡️</div>
+            <div>
+              <div class="cert-title">MOOC de l'ANSSI</div>
+              <div class="cert-subtitle">Agence Nationale de la Sécurité des Systèmes d'Information</div>
+            </div>
+          </div>
+          <div class="cert-header-right">
+            <span class="cert-count">1 certificat</span>
+            <span class="cert-chevron">▼</span>
+          </div>
+        </div>
+        <div class="cert-body">
+          <a class="cert-item" href="#" target="_blank">
+            <div class="cert-item-left">
+              <div class="cert-item-name">SecNumacadémie — Sensibilisation à la cybersécurité</div>
+              <div class="cert-item-date">ANSSI · 2024</div>
+            </div>
+            <div class="cert-item-right">
+              <span class="cert-link-icon">↗</span>
+            </div>
+          </a>
+        </div>
+      </div>
     :root {
       --bg: #ffffff;
       --text: #1d1d1f;
@@ -194,7 +220,6 @@ footer {
 
 <section id="veille">
   <div class="section-header reveal">
-    <div class="eyebrow">// 04 — veille technologique</div>
     <h2 class="section-title">Zero <span class="accent">Trust</span></h2>
     <p class="section-subtitle">Panorama des ressources sur l'architecture Zero Trust — "ne jamais faire confiance, toujours vérifier".</p>
   </div>
