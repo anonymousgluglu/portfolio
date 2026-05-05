@@ -154,36 +154,77 @@
   </div>
 
   <div class="contact-container reveal">
-    <form class="contact-form" action="https://formspree.io/f/xqenqdpd" method="POST">
+    <form 
+      class="contact-form"
+      action="https://formspree.io/f/xqenqdpd"
+      method="POST"
+    >
       <div class="form-group">
         <label for="name">Nom complet</label>
-        <input type="text" id="name" name="name" placeholder="Jean Dupont" required>
+        <input 
+          type="text" 
+          id="name" 
+          name="name" 
+          placeholder="Jean Dupont" 
+          required
+        >
       </div>
+
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="jean@exemple.com" required>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          placeholder="jean@exemple.com" 
+          required
+        >
       </div>
+
       <div class="form-group">
         <label for="message">Message</label>
-        <textarea id="message" name="message" rows="5" placeholder="Votre message..." required></textarea>
+        <textarea 
+          id="message" 
+          name="message" 
+          rows="5" 
+          placeholder="Votre message..." 
+          required
+        ></textarea>
       </div>
-      <input type="hidden" name="_next" value="index.html">
-      <button type="submit" class="btn-submit">Envoyer le message</button>
+
+      <!-- Options Formspree -->
+      <input type="hidden" name="_subject" value="Nouveau message depuis le portfolio">
+      <input type="hidden" name="_captcha" value="false">
+
+      <button type="submit" class="btn-submit">
+        Envoyer le message
+      </button>
     </form>
 
     <div class="contact-info-grid">
       <div class="info-block">
         <h4>Email</h4>
-        <p><a href="mailto:2222.lucas.2222.lucas@gmail.com">2222.lucas.2222.lucas@gmail.com</a></p>
+        <p>
+          <a href="mailto:2222.lucas.2222.lucas@gmail.com">
+            2222.lucas.2222.lucas@gmail.com
+          </a>
+        </p>
       </div>
+
       <div class="info-block">
         <h4>LinkedIn</h4>
-        <p><a href="https://linkedin.com/in/lucas-real" target="_blank">lucas-real</a></p>
+        <p>
+          <a href="https://linkedin.com/in/lucas-real" target="_blank">
+            lucas-real
+          </a>
+        </p>
       </div>
+
       <div class="info-block">
         <h4>Localisation</h4>
         <p>Le Havre, Normandie</p>
       </div>
+
       <div class="info-block">
         <h4>Formation</h4>
         <p>St Joseph — BTS SIO</p>
@@ -193,8 +234,12 @@
 </section>
 
 <footer>
-  <div class="footer-copy">&copy; 2026 Lucas Réal — Portfolio BTS SIO</div>
-  <div class="footer-copy">Hébergé sur <span>GitHub Pages</span></div>
+  <div class="footer-copy">
+    &copy; 2026 Lucas Réal — Portfolio BTS SIO
+  </div>
+  <div class="footer-copy">
+    Hébergé sur <span>GitHub Pages</span>
+  </div>
 </footer>
 
 <script>
