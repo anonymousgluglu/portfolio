@@ -115,7 +115,7 @@
     .tp-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
     .tp-desc { font-size: 12px; color: var(--text-muted); line-height: 1.7; font-weight: 400; }
 
-    /* ── TABLEAU PDF ── */
+    /* ── TABLEAU IMAGE ── */
     .tableau-wrapper { max-width: 860px; width: 100%; display: flex; flex-direction: column; gap: 24px; }
     .pdf-frame { width: 100%; border: 1px solid var(--border-light); border-radius: 10px; overflow: hidden; }
     .pdf-header {
@@ -124,8 +124,7 @@
       color: rgba(255,255,255,0.55); border-bottom: 1px solid var(--border-light);
       display: flex; align-items: center; justify-content: space-between;
     }
-    /* iframe hauteur augmentée + zoom page-width via URL hash */
-    .pdf-frame iframe { width: 100%; height: 720px; border: none; display: block; }
+    .pdf-frame img { width: 100%; height: auto; display: block; }
 
     /* ── COMPÉTENCES ── */
     .skills-grid {
@@ -179,7 +178,6 @@
       section { padding: 90px 20px 60px; }
       .tp-grid { grid-template-columns: 1fr; }
       .skills-grid { grid-template-columns: repeat(2, 1fr); }
-      .pdf-frame iframe { height: 460px; }
     }
   </style>
 </head>
@@ -306,8 +304,7 @@
         <span>// Aperçu — Tableau de synthèse</span>
         <a href="tableau_synthese_rempli.pdf" target="_blank" style="color:var(--blue); font-size:10px; text-decoration:none; letter-spacing:.1em;">OUVRIR ↗</a>
       </div>
-      <!-- #zoom=page-width force le PDF à occuper toute la largeur de l'iframe -->
-      <iframe src="tableau_synthese_rempli.pdf#zoom=page-width&scrollbar=0" title="Tableau de synthèse BTS SIO"></iframe>
+      <img src="tableau_synthese_rempli.png" alt="Tableau de synthèse BTS SIO" />
     </div>
   </div>
 </section>
