@@ -18,8 +18,7 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-<body class="dark-mode">
+    html { scroll-behavior: smooth; 
     body {
       background: var(--bg);
       color: var(--text);
@@ -436,8 +435,7 @@
 
 <script>
   const toggle = document.getElementById('darkToggle');
-  let dark = true;
-  toggle.textContent = '☀️';
+  let dark = false;
   toggle.addEventListener('click', () => {
     dark = !dark;
     document.body.classList.toggle('dark-mode', dark);
