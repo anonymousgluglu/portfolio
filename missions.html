@@ -3,39 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Missions et stages de Lucas Réal — BTS SIO SISR, réalisations et compétences développées." />
   <title>Missions — Lucas Réal</title>
   <style>
     :root {
-      --bg: #ffffff;
-      --text: #1d1d1f;
-      --text-muted: #6e6e73;
-      --blue: #0071e3;
-      --border-light: #e8e8ed;
-      --gray-bg: #fafafa;
+      --bg: #1c1c1e;
+      --bg-secondary: #2c2c2e;
+      --text: #f0f0f2;
+      --text-muted: #ffffff;
+      --blue: #3b9eff;
+      --border-light: #3a3a3c;
+      --gray-bg: #252527;
       --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
-
-    /* ── DARK MODE ── */
-    body.dark {
-      --bg: #0d0d0f;
-      --text: #f5f5f7;
-      --text-muted: #a1a1a6;
-      --blue: #2997ff;
-      --border-light: #2a2a2e;
-      --gray-bg: #1a1a1e;
-    }
-    body.dark nav {
-      background: rgba(13,13,15,0.6);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    body.dark .btn-solid { background: #f5f5f7; color: #0d0d0f; }
-    body.dark .btn-solid:hover { background: var(--blue); color: #fff; }
-    body.dark .stage-btn { border-color: #2a2a2e; }
-    body.dark .stage-btn:hover { border-color: var(--blue); color: var(--blue); }
-    body.dark .tp-card { background: #1a1a1e; border-color: #2a2a2e; }
-    body.dark .tp-card:hover { border-color: var(--blue); }
-    body.dark .skill-icon { background: rgba(41,151,255,0.1); }
-    body.dark .pdf-header { background: #1a1a1e; border-color: #2a2a2e; }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -50,33 +30,41 @@
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 20px 48px;
-      background: rgba(245,245,247,0.6);
-      backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-      border-bottom: 1px solid rgba(0,0,0,0.05);
-      transition: background 0.3s ease, border-color 0.3s ease;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(28, 28, 30, 0.30);
+      backdrop-filter: blur(24px) saturate(1.4);
+      -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
     .nav-logo {
       font-size: 15px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
       color: var(--text); text-decoration: none; flex-shrink: 0;
     }
     .nav-logo span { color: var(--blue); }
-    .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+    .nav-links { display: flex; gap: 30px; list-style: none; align-items: center; }
     .nav-links a {
       font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
-      color: var(--text-muted); text-decoration: none; transition: color .2s;
+      color: rgba(255,255,255,0.65); text-decoration: none; transition: color .2s;
     }
     .nav-links a:hover, .nav-links a.active { color: var(--blue); }
-    .dark-toggle {
-      background: none; border: 1px solid var(--border-light); border-radius: 6px;
-      padding: 7px 12px; cursor: pointer; font-size: 16px; color: var(--text);
-      transition: border-color 0.2s; flex-shrink: 0;
+    #darkToggle {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #ffffff;
+      padding: 5px 11px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1;
+      transition: all 0.2s;
+      flex-shrink: 0;
     }
-    .dark-toggle:hover { border-color: var(--blue); }
+    #darkToggle:hover { border-color: var(--blue); }
 
     /* ── SECTIONS ── */
     section {
-      min-height: 100vh; padding: 120px 48px 80px;
+      min-height: 100vh; padding: 100px 48px 80px;
       display: flex; flex-direction: column; align-items: center;
     }
     section + section { border-top: 1px solid var(--border-light); }
@@ -94,21 +82,21 @@
 
     /* ── STAGES ── */
     .stages-wrapper { max-width: 720px; width: 100%; display: flex; flex-direction: column; gap: 32px; }
-    .stage-intro { font-size: 15px; line-height: 1.85; color: var(--text-muted); text-align: center; }
-    .stage-intro strong { color: var(--text); }
+    .stage-intro { font-size: 15px; line-height: 1.85; color: var(--text-muted); text-align: center; font-weight: 400; }
+    .stage-intro strong { color: var(--text); font-weight: 600; }
     .stage-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
     .stage-btn {
       display: inline-flex; align-items: center; gap: 12px;
       border: 1px solid var(--border-light); border-radius: 10px;
       padding: 18px 32px; text-decoration: none; color: var(--text);
-      font-size: 13px; font-weight: 600; transition: 0.25s; background: var(--bg);
+      font-size: 13px; font-weight: 400; transition: 0.25s; background: var(--gray-bg);
     }
     .stage-btn:hover {
       border-color: var(--blue); color: var(--blue);
-      transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,113,227,0.1);
+      transform: translateY(-2px); box-shadow: 0 4px 20px rgba(59, 158, 255, 0.12);
     }
     .stage-btn-icon { font-size: 22px; }
-    .stage-btn-label { font-size: 10px; color: var(--text-muted); display: block; margin-top: 2px; font-weight: 400; letter-spacing: .05em; }
+    .stage-btn-label { font-size: 10px; color: rgba(255,255,255,0.55); display: block; margin-top: 2px; font-weight: 400; letter-spacing: .05em; }
 
     /* ── TP GRID ── */
     .tp-grid { max-width: 860px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -121,27 +109,23 @@
     .tp-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
     .tp-tag {
       font-size: 9px; letter-spacing: .12em; text-transform: uppercase;
-      color: var(--blue); border: 1px solid rgba(0,113,227,.3);
+      color: var(--blue); border: 1px solid rgba(59, 158, 255, 0.3);
       padding: 3px 8px; border-radius: 4px; white-space: nowrap;
     }
     .tp-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-    .tp-desc { font-size: 12px; color: var(--text-muted); line-height: 1.7; }
+    .tp-desc { font-size: 12px; color: var(--text-muted); line-height: 1.7; font-weight: 400; }
 
     /* ── TABLEAU PDF ── */
     .tableau-wrapper { max-width: 860px; width: 100%; display: flex; flex-direction: column; gap: 24px; }
-    .pdf-frame {
-      width: 100%; border: 1px solid var(--border-light);
-      border-radius: 10px; overflow: hidden;
-    }
+    .pdf-frame { width: 100%; border: 1px solid var(--border-light); border-radius: 10px; overflow: hidden; }
     .pdf-header {
       background: var(--gray-bg); padding: 12px 20px;
       font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
-      color: var(--text-muted); border-bottom: 1px solid var(--border-light);
+      color: rgba(255,255,255,0.55); border-bottom: 1px solid var(--border-light);
       display: flex; align-items: center; justify-content: space-between;
     }
-    .pdf-frame iframe {
-      width: 100%; height: 560px; border: none; display: block;
-    }
+    /* iframe hauteur augmentée + zoom page-width via URL hash */
+    .pdf-frame iframe { width: 100%; height: 720px; border: none; display: block; }
 
     /* ── COMPÉTENCES ── */
     .skills-grid {
@@ -151,10 +135,11 @@
     .skill-card { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; }
     .skill-icon {
       width: 56px; height: 56px; border-radius: 50%;
-      background: rgba(0,113,227,0.08);
-      display: flex; align-items: center; justify-content: center; font-size: 24px;
+      background: rgba(59, 158, 255, 0.1);
+      display: flex; align-items: center; justify-content: center;
     }
-    .skill-name { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text); line-height: 1.4; }
+    .skill-icon svg { width: 24px; height: 24px; }
+    .skill-name { font-size: 11px; font-weight: 400; letter-spacing: .08em; text-transform: uppercase; color: var(--text); line-height: 1.4; }
 
     /* ── BOUTON ── */
     .btn-solid {
@@ -163,33 +148,48 @@
       font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
       padding: 14px 28px; text-decoration: none; transition: 0.3s; border-radius: 4px;
     }
-    .btn-solid:hover { background: var(--blue); color: #fff; }
+    .btn-solid:hover { background: var(--blue); color: #fff; transform: translateY(-2px); }
 
     footer {
       background: var(--bg); border-top: 1px solid var(--border-light);
-      padding: 28px 48px; display: flex; align-items: center; justify-content: space-between;
+      padding: 40px 20px; display: flex; flex-direction: column;
+      align-items: center; gap: 8px; text-align: center;
     }
-    .footer-copy { font-size: 11px; color: var(--text-muted); letter-spacing: 0.1em; }
-    .footer-copy span { color: var(--blue); }
+    .footer-copy { font-size: 11px; color: rgba(255,255,255,0.45); }
+    .footer-copy span { color: var(--blue); font-weight: 600; }
 
     .reveal { opacity: 0; transform: translateY(22px); transition: .65s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
+    /* ── SHADER + DARK MODE ── */
+    #shader-canvas {
+      position: fixed; inset: 0; width: 100%; height: 100%;
+      z-index: 0; pointer-events: none; opacity: 0; transition: opacity 0.4s;
+    }
+    body.dark-mode #shader-canvas { opacity: 1; }
+    body.dark-mode { --bg: #111113; --gray-bg: #1a1a1c; }
+    body.dark-mode section, body.dark-mode footer { background: transparent; }
+    body.dark-mode nav { background: rgba(17,17,19,0.4); }
+    section, footer { position: relative; z-index: 1; }
+    nav { z-index: 100; }
+
     @media (max-width: 860px) {
-      nav { padding: 16px 20px; }
+      nav { padding: 0 20px; }
       .nav-links { display: none; }
-      section { padding: 100px 20px 60px; }
+      section { padding: 90px 20px 60px; }
       .tp-grid { grid-template-columns: 1fr; }
       .skills-grid { grid-template-columns: repeat(2, 1fr); }
-      .pdf-frame iframe { height: 380px; }
+      .pdf-frame iframe { height: 460px; }
     }
   </style>
 </head>
 <body>
 
+<canvas id="shader-canvas"></canvas>
+
 <nav>
   <a class="nav-logo" href="index.html">Lucas<span>.</span>Réal</a>
-  <div style="display:flex; align-items:center; gap:32px;">
+  <div style="display:flex; align-items:center; gap:30px;">
     <ul class="nav-links">
       <li><a href="index.html">Accueil</a></li>
       <li><a href="profil.html">Profil</a></li>
@@ -198,13 +198,10 @@
       <li><a href="veille.html">Veille Technologique</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
-    <button class="dark-toggle" id="darkToggle" title="Mode nuit">🌙</button>
+    <button id="darkToggle" title="Mode nuit">🌙</button>
   </div>
 </nav>
 
-<!-- ══════════════════════════════
-     SECTION 1 — RAPPORTS DE STAGE
-══════════════════════════════════ -->
 <section id="stages">
   <div class="section-header reveal">
     <div class="eyebrow">// 03 — expériences</div>
@@ -223,14 +220,14 @@
 
     <div class="stage-buttons reveal">
       <a class="stage-btn" href="Rapport_stage_BTS_1a.pdf" target="_blank">
-        <span class="stage-btn-icon">📄</span>
+        <span class="stage-btn-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b9eff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></span>
         <span>
           Stage 1 — Caux Seine Agglo
           <span class="stage-btn-label">Rapport de stage — 2025</span>
         </span>
       </a>
       <a class="stage-btn" href="Rapport_stage_BTS_2a.pdf" target="_blank">
-        <span class="stage-btn-icon">📄</span>
+        <span class="stage-btn-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b9eff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></span>
         <span>
           Stage 2 — Alcéane
           <span class="stage-btn-label">Rapport de stage — 2026</span>
@@ -240,9 +237,6 @@
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     SECTION 2 — RÉALISATIONS BTS
-══════════════════════════════════ -->
 <section id="realisations">
   <div class="section-header reveal">
     <div class="eyebrow">// 04 — travaux pratiques</div>
@@ -250,49 +244,39 @@
   </div>
 
   <div class="tp-grid">
-
     <div class="tp-card reveal">
       <div class="tp-card-header"><span class="tp-tag">Réseau</span></div>
       <div class="tp-title">Active Directory</div>
       <div class="tp-desc">Installation et configuration d'un domaine Active Directory sous Windows Server. Gestion des utilisateurs, groupes et stratégies de groupe (GPO).</div>
     </div>
-
     <div class="tp-card reveal">
       <div class="tp-card-header"><span class="tp-tag">Réseau</span></div>
       <div class="tp-title">Configuration Cisco (VLAN & Routage)</div>
       <div class="tp-desc">Mise en place de VLANs et configuration du routage inter-VLAN sur des switches et routeurs Cisco en environnement simulé (Packet Tracer).</div>
     </div>
-
     <div class="tp-card reveal">
       <div class="tp-card-header"><span class="tp-tag">Système</span></div>
       <div class="tp-title">Services réseau Linux</div>
       <div class="tp-desc">Déploiement de services DHCP, DNS, Apache et SSH sous Debian/Ubuntu. Administration en ligne de commande et configuration des fichiers de conf.</div>
     </div>
-
     <div class="tp-card reveal">
       <div class="tp-card-header"><span class="tp-tag">Sécurité</span></div>
       <div class="tp-title">Firewall pfSense / Stormshield</div>
       <div class="tp-desc">Mise en place et configuration d'un pare-feu pfSense/Stormshield. Définition de règles de filtrage, gestion des interfaces WAN/LAN et configuration du NAT.</div>
     </div>
-
     <div class="tp-card reveal">
       <div class="tp-card-header"><span class="tp-tag">Virtualisation</span></div>
       <div class="tp-title">Virtualisation VirtualBox / VMware</div>
       <div class="tp-desc">Création et gestion de machines virtuelles (Windows Server, Debian). Configuration des réseaux internes, snapshots et clonage de VMs.</div>
     </div>
-
     <div class="tp-card reveal">
       <div class="tp-card-header"><span class="tp-tag">Scripting</span></div>
       <div class="tp-title">Scripts Bash & PowerShell</div>
       <div class="tp-desc">Automatisation de tâches d'administration : création de comptes utilisateurs en masse, GPO, sauvegardes automatiques et rapports système.</div>
     </div>
-
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     SECTION 3 — TABLEAU DE SYNTHÈSE
-══════════════════════════════════ -->
 <section id="tableau">
   <div class="section-header reveal">
     <div class="eyebrow">// 05 — document officiel</div>
@@ -309,7 +293,7 @@
 
     <div class="stage-buttons reveal">
       <a class="stage-btn" href="tableau_synthese_rempli.pdf" target="_blank">
-        <span class="stage-btn-icon">📋</span>
+        <span class="stage-btn-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b9eff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg></span>
         <span>
           Télécharger le tableau
           <span class="stage-btn-label">Document officiel BTS SIO — Session 2025</span>
@@ -322,14 +306,12 @@
         <span>// Aperçu — Tableau de synthèse</span>
         <a href="tableau_synthese_rempli.pdf" target="_blank" style="color:var(--blue); font-size:10px; text-decoration:none; letter-spacing:.1em;">OUVRIR ↗</a>
       </div>
-      <iframe src="tableau_synthese_rempli.pdf" title="Tableau de synthèse BTS SIO"></iframe>
+      <!-- #zoom=page-width force le PDF à occuper toute la largeur de l'iframe -->
+      <iframe src="tableau_synthese_rempli.pdf#zoom=page-width&scrollbar=0" title="Tableau de synthèse BTS SIO"></iframe>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     SECTION 4 — COMPÉTENCES
-══════════════════════════════════ -->
 <section id="competences">
   <div class="section-header reveal">
     <div class="eyebrow">// 06 — bilan</div>
@@ -337,47 +319,14 @@
   </div>
 
   <div class="skills-grid">
-
-    <div class="skill-card reveal">
-      <div class="skill-icon">🗂️</div>
-      <div class="skill-name">Travailler en mode projet</div>
-    </div>
-
-    <div class="skill-card reveal">
-      <div class="skill-icon">🌐</div>
-      <div class="skill-name">Configuration équipements réseau</div>
-    </div>
-
-    <div class="skill-card reveal">
-      <div class="skill-icon">🖥️</div>
-      <div class="skill-name">Gérer le patrimoine informatique</div>
-    </div>
-
-    <div class="skill-card reveal">
-      <div class="skill-icon">📈</div>
-      <div class="skill-name">Organiser son développement professionnel</div>
-    </div>
-
-    <div class="skill-card reveal">
-      <div class="skill-icon">🔒</div>
-      <div class="skill-name">Répondre aux incidents de sécurité</div>
-    </div>
-
-    <div class="skill-card reveal">
-      <div class="skill-icon">⚙️</div>
-      <div class="skill-name">Administrer les systèmes et réseaux</div>
-    </div>
-
-    <div class="skill-card reveal">
-      <div class="skill-icon">🤝</div>
-      <div class="skill-name">Travailler en équipe</div>
-    </div>
-
-    <div class="skill-card reveal">
-      <div class="skill-icon">📝</div>
-      <div class="skill-name">Rédiger des documentations techniques</div>
-    </div>
-
+    <div class="skill-card reveal"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#3b9eff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8l-2 4h12z"/></svg></div><div class="skill-name">Travailler en mode projet</div></div>
+    <div class="skill-card reveal"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#3b9eff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="skill-name">Configuration équipements réseau</div></div>
+    <div class="skill-card reveal"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#3b9eff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div class="skill-name">Gérer le patrimoine informatique</div></div>
+    <div class="skill-card reveal"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#3b9eff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></div><div class="skill-name">Organiser son développement professionnel</div></div>
+    <div class="skill-card reveal"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#3b9eff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="skill-name">Répondre aux incidents de sécurité</div></div>
+    <div class="skill-card reveal"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#3b9eff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 1 1 4.93 19.07 10 10 0 0 1 19.07 4.93z"/><path d="M12 8v1m0 6v1m-4-4H7m10 0h-1"/></svg></div><div class="skill-name">Administrer les systèmes et réseaux</div></div>
+    <div class="skill-card reveal"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#3b9eff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="skill-name">Travailler en équipe</div></div>
+    <div class="skill-card reveal"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#3b9eff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div><div class="skill-name">Rédiger des documentations techniques</div></div>
   </div>
 
   <div class="reveal" style="margin-top: 60px;">
@@ -399,17 +348,31 @@
   }, { threshold: 0.1 });
   reveals.forEach(el => observer.observe(el));
 
-  const darkToggle = document.getElementById('darkToggle');
-  if (localStorage.getItem('darkMode') === 'on') {
-    document.body.classList.add('dark');
-    darkToggle.textContent = '☀️';
-  }
-  darkToggle.addEventListener('click', function() {
-    document.body.classList.toggle('dark');
-    const isDark = document.body.classList.contains('dark');
-    darkToggle.textContent = isDark ? '☀️' : '🌙';
-    localStorage.setItem('darkMode', isDark ? 'on' : 'off');
+  const toggleBtn = document.getElementById('darkToggle');
+  let dark = false;
+  toggleBtn.addEventListener('click', () => {
+    dark = !dark;
+    document.body.classList.toggle('dark-mode', dark);
+    toggleBtn.textContent = dark ? '☀️' : '🌙';
   });
+
+  (function() {
+    const canvas = document.getElementById('shader-canvas');
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (!gl) return;
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; gl.viewport(0, 0, canvas.width, canvas.height); }
+    window.addEventListener('resize', resize); resize();
+    const vs = `attribute vec2 a_position; void main() { gl_Position = vec4(a_position, 0.0, 1.0); }`;
+    const fs = `precision mediump float;uniform float u_time;uniform vec2 u_resolution;float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}float noise(vec2 p){vec2 i=floor(p);vec2 f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);}float fbm(vec2 p){float v=0.0,a=0.5;for(int i=0;i<5;i++){v+=a*noise(p);p=p*2.1+vec2(1.7,9.2);a*=0.5;}return v;}void main(){vec2 uv=gl_FragCoord.xy/u_resolution;float t=u_time*0.12;vec2 q=vec2(fbm(uv+t),fbm(uv+vec2(1.0)));vec2 r=vec2(fbm(uv+4.0*q+vec2(1.7,9.2)+0.15*t),fbm(uv+4.0*q+vec2(8.3,2.8)+0.126*t));float f=fbm(uv+4.0*r);vec3 c1=vec3(0.067,0.067,0.075),c2=vec3(0.227,0.227,0.235),c3=vec3(0.431,0.431,0.451),cBlue=vec3(0.231,0.620,1.0);vec3 color=mix(c1,c2,clamp(f*f*4.0,0.0,1.0));color=mix(color,c3,clamp(length(q),0.0,1.0));color=mix(color,cBlue*0.25,clamp(length(r.x),0.0,1.0)*0.18);float vign=clamp(1.0-length((uv-0.5)*1.6),0.0,1.0);color*=0.55+0.55*vign;gl_FragColor=vec4(color,1.0);}`;
+    function compile(type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s;}
+    const prog=gl.createProgram();gl.attachShader(prog,compile(gl.VERTEX_SHADER,vs));gl.attachShader(prog,compile(gl.FRAGMENT_SHADER,fs));gl.linkProgram(prog);gl.useProgram(prog);
+    const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+    const pos=gl.getAttribLocation(prog,'a_position');gl.enableVertexAttribArray(pos);gl.vertexAttribPointer(pos,2,gl.FLOAT,false,0,0);
+    const uTime=gl.getUniformLocation(prog,'u_time'),uRes=gl.getUniformLocation(prog,'u_resolution');
+    let start=performance.now();
+    function render(){gl.uniform1f(uTime,(performance.now()-start)/1000);gl.uniform2f(uRes,canvas.width,canvas.height);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);requestAnimationFrame(render);}
+    render();
+  })();
 </script>
 </body>
 </html>
