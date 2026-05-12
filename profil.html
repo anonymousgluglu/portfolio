@@ -181,12 +181,12 @@
     #cv .section-header { margin-bottom: 30px; }
     .cv-wrapper { width: 100%; max-width: 800px; }
     .cv-preview-frame {
-      width: 100%; height: 600px;
+      width: 100%;
       background: var(--gray-bg); border: 1px solid var(--border-light);
       border-radius: 16px; overflow: hidden;
       box-shadow: 0 10px 40px rgba(0,0,0,0.4); margin-bottom: 25px;
     }
-    .cv-preview-frame iframe { width: 100%; height: 100%; border: none; }
+    .cv-preview-frame img { width: 100%; height: auto; display: block; }
     .cv-actions { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
 
     /* ── FOOTER ── */
@@ -411,14 +411,13 @@
   <div class="profil-center">
     <div class="cv-wrapper reveal">
       <div class="cv-preview-frame">
-        <iframe src="CV_sans_photo.pdf" title="CV Lucas Réal"></iframe>
+        <img src="CV_sans_photo.png" alt="CV Lucas Réal" />
       </div>
       <div class="cv-actions">
         <a class="btn-solid" href="CV_sans_photo.pdf" download="CV_sans_photo.pdf">
           ⬇ Télécharger le CV
         </a>
-        <a class="btn-outline" href="CV_sans_photo.pdf
-          " target="_blank">
+        <a class="btn-outline" href="CV_sans_photo.pdf" target="_blank">
           ↗ Ouvrir en plein écran
         </a>
       </div>
