@@ -14,6 +14,16 @@
       --blue: #3b9eff;
       --border-light: #3a3a3c;
       --gray-bg: #252527;
+      --text-sub: rgba(255,255,255,0.55);
+      --text-dim: rgba(255,255,255,0.65);
+      --nav-link: rgba(255,255,255,0.65);
+      --toggle-border: rgba(255,255,255,0.25);
+      --toggle-color: #ffffff;
+      --footer-text: rgba(255,255,255,0.45);
+      --nav-border: rgba(255,255,255,0.08);
+      --input-placeholder: rgba(255,255,255,0.35);
+      --filter-color: var(--text-dim);
+
       --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
@@ -33,7 +43,8 @@
       background: rgba(28, 28, 30, 0.30);
       backdrop-filter: blur(24px) saturate(1.4);
       -webkit-backdrop-filter: blur(24px) saturate(1.4);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid var(--nav-border);
+      transition: background 0.3s ease;
     }
     .nav-logo {
       font-size: 15px; font-weight: 800; letter-spacing: .12em;
@@ -43,13 +54,13 @@
     .nav-links { display: flex; gap: 30px; list-style: none; align-items: center; }
     .nav-links a {
       font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
-      color: rgba(255,255,255,0.65); text-decoration: none; transition: color .2s; font-weight: 600;
+      color: var(--nav-link); text-decoration: none; transition: color .2s; font-weight: 600;
     }
     .nav-links a:hover, .nav-links a.active { color: var(--blue); }
     #darkToggle {
       background: transparent;
-      border: 1px solid rgba(255,255,255,0.25);
-      color: #ffffff;
+      border: 1px solid var(--toggle-border);
+      color: var(--toggle-color);
       padding: 5px 11px;
       border-radius: 20px;
       cursor: pointer;
@@ -81,7 +92,7 @@
     .form-group { display: flex; flex-direction: column; gap: 8px; }
     .form-group label {
       font-size: 10px; text-transform: uppercase;
-      letter-spacing: .1em; color: rgba(255,255,255,0.6); font-weight: 400;
+      letter-spacing: .1em; color: var(--text-dim); font-weight: 400;
     }
     .form-group input, .form-group textarea {
       background: var(--gray-bg); border: 1px solid var(--border-light);
@@ -89,7 +100,7 @@
       font-size: 14px; border-radius: 12px; outline: none; transition: 0.2s;
     }
     .form-group input::placeholder,
-    .form-group textarea::placeholder { color: rgba(255,255,255,0.35); }
+    .form-group textarea::placeholder { color: var(--input-placeholder); }
     .form-group input:focus, .form-group textarea:focus { border-color: var(--blue); background: var(--bg-secondary); }
 
     .btn-submit {
@@ -117,7 +128,7 @@
       background: var(--bg); border-top: 1px solid var(--border-light);
       padding: 40px 24px; display: flex; flex-direction: column; align-items: center; gap: 8px;
     }
-    .footer-copy { font-size: 11px; color: rgba(255,255,255,0.45); }
+    .footer-copy { font-size: 11px; color: var(--footer-text); }
     .footer-copy span { color: var(--blue); font-weight: 600; }
 
     /* ── SHADER + DARK MODE ── */
@@ -126,7 +137,20 @@
       z-index: 0; pointer-events: none; opacity: 1; transition: opacity 0.4s;
     }
     body.light-mode #shader-canvas { opacity: 0; }
-    body.light-mode { --bg: #f5f5f7; --bg-secondary: #e8e8ed; --text: #1c1c1e; --text-muted: #1c1c1e; --gray-bg: #ffffff; --border-light: #d1d1d6; }
+    body.light-mode {
+      --bg: #f5f5f7; --bg-secondary: #e8e8ed;
+      --text: #1c1c1e; --text-muted: #333333;
+      --gray-bg: #ffffff; --border-light: #d1d1d6;
+      --text-sub: rgba(0,0,0,0.5);
+      --text-dim: rgba(0,0,0,0.6);
+      --nav-link: rgba(0,0,0,0.65);
+      --toggle-border: rgba(0,0,0,0.25);
+      --toggle-color: #1c1c1e;
+      --footer-text: rgba(0,0,0,0.5);
+      --nav-border: rgba(0,0,0,0.08);
+      --input-placeholder: rgba(0,0,0,0.35);
+      --filter-color: rgba(0,0,0,0.6);
+    }
     body.light-mode section, body.light-mode footer { background: var(--bg); }
     body.light-mode nav { background: rgba(245,245,247,0.85); border-bottom-color: rgba(0,0,0,0.1); }
     section, footer { position: relative; z-index: 1; }
